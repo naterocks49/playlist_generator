@@ -11,6 +11,12 @@
     <h1>MAKE A PLAYLIST</h1>
     <h3>ARTIST</h3>
     <h3>GENRE</h3>
+    <h1>Artists List</h1>
+    <ul>
+        {% for artist in artists %}
+            <li>{{ artist }}</li>
+        {% endfor %}
+    </ul>
     <button>Generate</button>
 </body>
 </html>
