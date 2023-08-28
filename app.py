@@ -51,7 +51,7 @@ def create_playlist():
     playlist_name = "My Awesome Playlist"
     playlist_description = "An automatically created playlist by the Spotify Playlist App"
     sp.user_playlist_create(user_info['id'], playlist_name, public=True, description=playlist_description)
-    
+
     return "Playlist created!"
 
 
