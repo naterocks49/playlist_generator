@@ -6,7 +6,6 @@ import os
 
 load_dotenv()  # Load environment variables from .env file
 
-
 app = Flask(__name__)
 app.secret_key = os.getenv('FLASK_SECRET')
 
@@ -27,16 +26,19 @@ def index():
         return redirect(url_for('login'))
     return render_template('index.html', artists=artists)
 
+
 @app.route('/login')
 def login():
     auth_url = sp_oauth.get_authorize_url()
     return render_template('login.html', auth_url=auth_url)
+
 
 @app.route('/callback')
 def callback():
     token_info = sp_oauth.get_access_token(request.args['code'])
     session['token_info'] = token_info
     return redirect(url_for('index'))
+
 
 @app.route('/create_playlist')
 def create_playlist():
@@ -51,6 +53,7 @@ def create_playlist():
     sp.user_playlist_create(user_info['id'], playlist_name, public=True, description=playlist_description)
     
     return "Playlist created!"
+
 
 if __name__ == '__main__':
     app.run(debug=True)
