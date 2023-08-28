@@ -15,8 +15,12 @@ SPOTIFY_REDIRECT_URI = os.getenv('SPOTIFY_REDIRECT_URI')
 
 
 sp_oauth = SpotifyOAuth(
-    SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, SPOTIFY_REDIRECT_URI, scope='playlist-modify-public'
+    SPOTIFY_CLIENT_ID,
+    SPOTIFY_CLIENT_SECRET,
+    SPOTIFY_REDIRECT_URI,
+    scope='playlist-modify-public'
 )
+
 
 @app.route('/')
 def index():
@@ -49,8 +53,14 @@ def create_playlist():
     sp = spotipy.Spotify(auth=token_info['access_token'])
     user_info = sp.me()
     playlist_name = "My Awesome Playlist"
-    playlist_description = "An automatically created playlist by the Spotify Playlist App"
-    sp.user_playlist_create(user_info['id'], playlist_name, public=True, description=playlist_description)
+    playlist_description = "An automatically created \
+    playlist by the Spotify Playlist App"
+    sp.user_playlist_create(
+        user_info['id'],
+        playlist_name,
+        public=True,
+        description=playlist_description
+    )
 
     return "Playlist created!"
 
